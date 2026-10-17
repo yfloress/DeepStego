@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "deepstego"
+version = "0.1.0"
+description = "Mensajes ocultos en imágenes con redes neuronales"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
+# torch sin versión fija: Colab y Kaggle traen la suya con CUDA.
+dependencies = [
+    "torch",
+    "torchvision",
+    "opencv-python",
+    "numpy",
+    "scikit-image",
+    "qrcode[pil]",
+    "matplotlib",
+]
+
+[project.optional-dependencies]
+app = ["gradio"]
+dev = ["pytest", "ruff"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100

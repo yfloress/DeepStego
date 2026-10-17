@@ -216,3 +216,21 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# DeepStego: datos, pesos y salidas fuera de git
+/data/
+/checkpoints/
+/outputs/
+*.pt
+*.pth
+*.ckpt
+
+# Gradio
+.gradio/
+flagged/
+
+# Editores y sistema operativo
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
