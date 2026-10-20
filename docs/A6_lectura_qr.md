@@ -106,6 +106,7 @@ tiene `pyproject.toml`).
 **Windows (PowerShell)**
 
 ```powershell
+Set-ExecutionPolicy -Scope CurrentUser RemoteSigned #en caso que les tire que la ejecución de scripts está deshabilitada en este sistema
 python -m venv .venv
 .venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
