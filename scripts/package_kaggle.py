@@ -10,7 +10,6 @@ def main():
         root / "pyproject.toml",
         root / "README.md",
         root / "LICENSE",
-        root / "docs" / "Entrenamiento_Kaggle.md",
         root / "notebooks" / "train_kaggle.ipynb",
         *sorted((root / "src").rglob("*.py")),
     ]
