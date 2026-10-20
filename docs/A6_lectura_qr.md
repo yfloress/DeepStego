@@ -114,8 +114,6 @@ python -m pip install opencv-python numpy "qrcode[pil]" pytest
 python -m pip install -e . --no-deps
 ```
 
-- Si `Activate.ps1` da un error de "ejecución de scripts deshabilitada", ejecuten una vez
-  `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` y vuelvan a activar.
 - En `cmd` (no PowerShell) se activa con `.venv\Scripts\activate.bat`.
 - Se instala sin PyTorch a propósito: la A6 no lo necesita, y en Windows torch suele fallar
   por rutas largas (ver *Problemas frecuentes*). Para instalar todo, primero habiliten las
@@ -256,21 +254,7 @@ Para revisarlos: `explorer outputs\a6` (Windows), `open outputs/a6` (macOS),
 
 Las imágenes quedan en el panel de archivos de la izquierda (`DeepStego/outputs/a6`).
 
-### Problemas frecuentes
 
-| Síntoma | Sistema | Causa y solución |
-|---|---|---|
-| `'pytest' no se reconoce como nombre de un cmdlet` | Windows | El comando no está en el PATH o la instalación falló. Usen `python -m pytest`. |
-| `WinError 206 ... demasiado largo` al instalar torch | Windows | Límite de 260 caracteres en rutas. Instalen sin torch (Paso 2) o habiliten rutas largas en PowerShell **como administrador**: `New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" -Name "LongPathsEnabled" -Value 1 -PropertyType DWORD -Force` y reinicien la terminal. |
-| Rutas larguísimas con `PythonSoftwareFoundation.Python.3.xx_...` | Windows | Es el Python de Microsoft Store. Recomendado: desinstalarlo e instalar el de python.org marcando *Add python.exe to PATH* y *Disable path length limit*. |
-| `Activate.ps1 no se puede cargar ... ejecución de scripts deshabilitada` | Windows | `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` (una vez). |
-| Faltan las imágenes de `ruido` y `blur` en `outputs/a6` | Windows | `cv2.imwrite` no guarda nombres con `σ`. Requiere la corrección de nombres ASCII en `scripts/bench_qr.py` (hagan `git pull` de la branch). |
-| `error: externally-managed-environment` | macOS (Homebrew) / Linux | Están fuera del entorno virtual o `pip` apunta al del sistema. Activen `.venv` y usen `python -m pip`. Comprueben con `which python` (debe terminar en `.venv/bin/python`). |
-| `python: command not found` | macOS / Linux | Usen `python3` para crear el entorno; dentro del entorno activado `python` ya existe. |
-| `ImportError: libGL.so.1` al importar cv2 | Linux | `python -m pip uninstall -y opencv-python && python -m pip install opencv-python-headless`. |
-| `ModuleNotFoundError: No module named 'deepstego'` | Todos | Falta `python -m pip install -e .` (o `-e . --no-deps`), o el entorno no está activado, o no están en la carpeta `DeepStego`. |
-| `ImportError: cannot import name 'read_qr'` | Todos | Están en `main` antes del merge. `git checkout feature/a6-lectura-qr`. |
-| No se crea la carpeta `outputs` | Todos | Al benchmark le faltan `--csv` y/o `--save-examples`. |
 
 ## Pendiente / siguiente
 
