@@ -1,4 +1,5 @@
 # DeepStego
-Mensajes ocultos en imágenes con redes neuronales
 
-Instalación local, uso en Colab y cómo correr cada módulo: pendiente.
+Mensajes ocultos en imágenes con redes neuronales.
+
+[Propuesta del proyecto](docs/Propuesta_Proyecto_DeepStego.md).
