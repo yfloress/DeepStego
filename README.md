@@ -55,5 +55,16 @@ uv run pytest
 uv run ruff check .
 ```
 
-El generador cubre la parte de QR sintéticos de A4. La carga de DIV2K/COCO,
-el entrenamiento y la limpieza/lectura de QR revelados siguen pendientes.
+## Entrenamiento de M2
+
+La carga de DIV2K, las CNN de ocultamiento/revelado y el entrenamiento conjunto
+con cuantización de 8 bits están implementados. Se guardan checkpoints de la
+última y mejor época, junto con pérdidas y PSNR de validación.
+
+Para Kaggle, importa [el notebook](notebooks/train_kaggle.ipynb) y sigue
+[la guía de entrenamiento](docs/Entrenamiento_Kaggle.md). Empieza con una época
+y continúa desde `last.pt` tras revisar los resultados.
+
+Esta versión es una CNN inicial; todavía hay que entrenarla y comprobar los
+objetivos de calidad y lectura del QR. La evaluación completa de M4, COCO y
+el procesamiento de QR revelados de M3 siguen pendientes.
