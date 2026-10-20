@@ -219,7 +219,9 @@ __marimo__/
 
 # DeepStego: datos, pesos y salidas fuera de git
 /data/
-/checkpoints/
+/checkpoints/*
+!/checkpoints/best.pt
+!/checkpoints/last.pt
 /outputs/
 *.pth
 *.ckpt
