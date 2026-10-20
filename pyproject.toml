@@ -13,7 +13,7 @@ requires-python = ">=3.10"
 dependencies = [
     "torch",
     "torchvision",
-    "opencv-python",
+    "opencv-python>=4.8",
     "numpy",
     "scikit-image",
     "qrcode[pil]",
