@@ -4,7 +4,7 @@
 
 1. Importa `notebooks/train_kaggle.ipynb` en un notebook de Kaggle.
 2. Activa un acelerador GPU y el acceso a Internet.
-3. Adjunta el dataset `deepstego-div2k`, que contiene entrenamiento y validación.
+3. Adjunta el dataset `DeepStego-DIV2K`, que contiene entrenamiento y validación.
 4. Crea un dataset privado con `outputs/deepstego-kaggle.zip` y adjúntalo también.
    El ZIP contiene el código preparado en esta copia del repositorio.
 5. Ejecuta las celdas en orden.
@@ -13,13 +13,17 @@ La primera celda instala `uv` si falta y utiliza `uv` para instalar `qrcode[pil]
 Usa PyTorch y CUDA del entorno de Kaggle; no ejecutes `uv sync` en ese notebook.
 El código se copia a `/kaggle/working/deepstego-code` antes de importarlo.
 
-El notebook usa estas rutas:
+El notebook busca las carpetas `DIV2K_train_HR` y `DIV2K_valid_HR` con imágenes
+dentro de `/kaggle/input`, sin depender del nombre del dataset o las carpetas
+intermedias y sin distinguir mayúsculas de minúsculas.
+También acepta el ZIP de código con mayúsculas o minúsculas en su nombre.
 
-- `/kaggle/input/deepstego-div2k/Deepstego/DIV2K_train_HR`
-- `/kaggle/input/deepstego-div2k/Deepstego/DIV2K_valid_HR`
+Si aparece «Falta el código», adjunta el dataset creado con
+`outputs/deepstego-kaggle.zip`: el dataset de imágenes y el código son dos
+entradas distintas. Subir únicamente el notebook y DIV2K no es suficiente.
 
-Si Kaggle monta el dataset en otra ubicación, ajusta `DATASET_ROOT`.
-Deben apuntar a las imágenes de alta resolución, no a variantes LR.
+Si hay varias copias de una partición, indica su ruta en `TRAIN_DIR` o `VAL_DIR`.
+Si falta una partición, la ejecución se detiene; no se divide validación para entrenar.
 Comprueba los recuentos: el DIV2K completo tiene 800 imágenes de entrenamiento
 y 100 de validación. No apuntes ambas variables a la raíz común del dataset.
 

@@ -4,7 +4,7 @@ import torch
 from PIL import Image
 from torch.utils.data import DataLoader
 
-from deepstego.data import DIV2KDataset
+from deepstego.data import DIV2KDataset, find_div2k_split
 
 
 @pytest.fixture
@@ -55,3 +55,22 @@ def test_missing_images_and_too_small_images(tmp_path):
     dataset = DIV2KDataset(tmp_path, training=True)
     with pytest.raises(ValueError, match="menor a 128"):
         dataset[0]
+
+
+@pytest.mark.parametrize("folder", ["DIV2K_train_HR", "div2k_TRAIN_hr"])
+def test_find_split_ignores_mount_name_and_empty_wrapper(tmp_path, folder):
+    leaf = tmp_path / "datasets" / "owner" / "another-name" / folder / folder
+    leaf.mkdir(parents=True)
+    Image.new("RGB", (128, 128)).save(leaf / "0001.PNG")
+    assert find_div2k_split(tmp_path, "DIV2K_train_HR") == leaf
+
+
+def test_find_split_requires_one_partition(tmp_path):
+    with pytest.raises(FileNotFoundError, match="DIV2K_valid_HR"):
+        find_div2k_split(tmp_path, "DIV2K_valid_HR")
+    for name in ("first", "second"):
+        folder = tmp_path / name / "DIV2K_valid_HR"
+        folder.mkdir(parents=True)
+        Image.new("RGB", (128, 128)).save(folder / "0001.png")
+    with pytest.raises(ValueError, match="varias carpetas"):
+        find_div2k_split(tmp_path, "DIV2K_valid_HR")

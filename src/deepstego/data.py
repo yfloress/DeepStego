@@ -11,6 +11,24 @@ from torch.utils.data import Dataset
 from deepstego.qr import MAX_MESSAGE_LENGTH, QR_SIZE, RANDOM_ALPHABET, generate_qr_array
 
 
+def find_div2k_split(root: str | Path, folder: str) -> Path:
+    """Localiza una partición por su carpeta de imágenes."""
+    candidates = []
+    for path in Path(root).rglob("*"):
+        if not path.is_dir() or path.name.casefold() != folder.casefold():
+            continue
+        if any(
+            child.is_file() and child.suffix.lower() in {".png", ".jpg", ".jpeg"}
+            for child in path.iterdir()
+        ):
+            candidates.append(path)
+    if not candidates:
+        raise FileNotFoundError(f"No se encontró {folder} con imágenes dentro de {root}.")
+    if len(candidates) > 1:
+        raise ValueError(f"Hay varias carpetas {folder}; indica una ruta explícita: {candidates}")
+    return candidates[0]
+
+
 class DIV2KDataset(Dataset):
     def __init__(
         self,
