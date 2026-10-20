@@ -90,7 +90,7 @@ def main() -> None:
             out = args.save_examples
             out.mkdir(parents=True, exist_ok=True)
             res = read_qr(revealed[0])
-            slug = "".join(c if c.isalnum() else "_" for c in name)
+            slug = "".join(c if c.isascii() and c.isalnum() else "_" for c in name)
             cv2.imwrite(str(out / f"{slug}_revelado.png"), np.round(revealed[0] * 255).astype(np.uint8))
             cv2.imwrite(str(out / f"{slug}_limpio.png"), res.clean)
 
