@@ -1,7 +1,7 @@
 # A6 · Lectura de QR (M3)
 
 **Responsable:** IF (70 %) · **Participa:** JM (30 %) · **Objetivo:** O3 · **Requisito:** RF4
-**Branch:** `feature/a6-lectura-qr` · **Código:** `src/deepstego/qr.py`
+**Branch:** `m3` · **Código:** `src/deepstego/qr.py`
 
 ## Qué hace
 
