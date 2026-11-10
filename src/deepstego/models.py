@@ -36,6 +36,9 @@ class RevealNet(nn.Module):
     def forward(self, container):
         return self.network(container)
 
+    def forward_logits(self, container):
+        return self.network[:-1](container)
+
 
 def quantize_8bit(image: torch.Tensor) -> torch.Tensor:
     """Redondea a 8 bits conservando el gradiente mediante STE."""

@@ -11,6 +11,7 @@ def main():
         root / "README.md",
         root / "LICENSE",
         root / "notebooks" / "train_kaggle.ipynb",
+        root / "checkpoints" / "best.pt",
         *sorted((root / "src").rglob("*.py")),
     ]
     with ZipFile(output, "w", compression=ZIP_DEFLATED) as archive:
