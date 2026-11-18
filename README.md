@@ -32,6 +32,9 @@ Abre **[127.0.0.1:7860](http://127.0.0.1:7860)**. La aplicación carga `checkpoi
 
 > La fotografía se ajusta a **128 × 128 píxeles**. Conserva el PNG descargado sin redimensionarlo ni convertirlo a JPEG.
 
+## Video
+[Link a Youtube](https://youtu.be/5oeijoNcvb0)
+
 ---
 
 <p align="center">
